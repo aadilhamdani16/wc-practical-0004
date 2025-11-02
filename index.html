@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightgray;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        form {
+            background-color: white;
+            width: 400px;
+            margin: 20px auto;
+            padding: 15px;
+            border: 2px solid black;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 95%;
+            padding: 5px;
+            margin: 5px 0;
+            border: 1px solid black;
+        }
+        input[type=submit], input[type=reset] {
+            width: 48%;
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+        }
+        input[type=submit]:hover, input[type=reset]:hover {
+            background-color: darkgreen;
+        }
+        .btns {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var fname = document.forms["regForm"]["fname"].value;
+            if (!/^[A-Za-z]+$/.test(fname) || fname.length < 6) {
+                alert("First Name should contain only alphabets and must be at least 6 characters long.");
+                return false;
+            }
+
+            var lname = document.forms["regForm"]["lname"].value;
+            if (lname == "") {
+                alert("Last Name cannot be empty.");
+                return false;
+            }
+
+            var password = document.forms["regForm"]["password"].value;
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                return false;
+            }
+
+            var email = document.forms["regForm"]["email"].value;
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email (example: name@domain.com).");
+                return false;
+            }
+
+            var mobile = document.forms["regForm"]["mobile"].value;
+            if (!/^[0-9]{10}$/.test(mobile)) {
+                alert("Mobile number must contain exactly 10 digits.");
+                return false;
+            }
+
+            var address = document.forms["regForm"]["address"].value;
+            if (address == "") {
+                alert("Address cannot be empty.");
+                return false;
+            }
+
+            alert("Registration Successful!");
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h2>Registration Form</h2>
+    <form name="regForm" onsubmit="return validateForm()">
+        <label>First Name:</label>
+        <input type="text" name="fname">
+
+        <label>Last Name:</label>
+        <input type="text" name="lname">
+
+        <label>Password:</label>
+        <input type="password" name="password">
+
+        <label>Email:</label>
+        <input type="text" name="email">
+
+        <label>Mobile Number:</label>
+        <input type="text" name="mobile">
+
+        <label>Address:</label>
+        <textarea name="address" rows="3"></textarea>
+
+        <div class="btns">
+            <input type="submit" value="Register">
+            <input type="reset" value="Clear">
+        </div>
+    </form>
+</body>
+</html>
